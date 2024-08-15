@@ -1,18 +1,38 @@
-// Ensure the videos are properly initialized
 document.addEventListener('DOMContentLoaded', function() {
     const backgroundVideo = document.querySelector('.background-video');
     const newBackgroundVideo = document.querySelector('.new-background-video');
     const backgroundMusic = document.getElementById('background-music');
-    
+    const highlightAudio = document.getElementById('highlight-audio');
+
+    // Function to handle audio playback with delay
+    function playHighlightAudio() {
+        if (highlightAudio) {
+            setTimeout(() => {
+                highlightAudio.play().catch(error => console.log('Highlight audio failed to play:', error));
+            }, 200); // 500 milliseconds delay
+        }
+    }
+
+    // Function to stop highlight audio
+    function stopHighlightAudio() {
+        if (highlightAudio) {
+            highlightAudio.pause();
+            highlightAudio.currentTime = 0;
+        }
+    }
+
     // Play the background video when the page loads
     if (backgroundVideo) {
         backgroundVideo.play().catch(error => console.log('Background video failed to play:', error));
     }
 
-    // Play the new background video with music when transitioning
+    // Play the highlight audio and transition to hidden content when the center button is clicked
     document.querySelector('.center-button').addEventListener('click', function() {
         const introScreen = document.querySelector('.intro-screen');
         const hiddenContent = document.querySelector('.hidden-content');
+
+        // Play highlight audio with delay when the center button is clicked
+        playHighlightAudio();
 
         introScreen.classList.add('zoomed');
 
@@ -33,6 +53,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (backgroundVideo) {
             backgroundVideo.volume = 0;
         }
+
+        // Stop highlight audio
+        stopHighlightAudio();
 
         setTimeout(() => {
             document.body.classList.add('blackout');
@@ -60,6 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 newBackgroundVideo.play().catch(error => console.log('New background video failed to play:', error));
                 newBackgroundVideo.volume = 1;
             }
+
+            // Stop highlight audio
+            stopHighlightAudio();
         }, 1000); 
     });
 });
