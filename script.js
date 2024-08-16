@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const newBackgroundVideo = document.querySelector('.new-background-video');
     const backgroundMusic = document.getElementById('background-music');
     const highlightAudio = document.getElementById('highlight-audio');
+    const thisnightMusic = document.getElementById('thisnight-music');
 
     function playHighlightAudio() {
         if (highlightAudio) {
@@ -80,9 +81,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.body.appendChild(hackVideo);
 
                     hackVideo.addEventListener('ended', () => {
-                        document.querySelector('.new-screen').style.display = 'flex';
+                        // After the hack video ends, remove the hack video and box
                         hackVideo.remove();
                         hackBox.remove();
+
+                        // Play the decline video
+                        const declineVideo = document.createElement('video');
+                        declineVideo.src = 'decline.mp4';
+                        declineVideo.autoplay = true;
+                        declineVideo.loop = true;
+                        declineVideo.classList.add('decline-video');
+                        document.body.appendChild(declineVideo);
+                        thisnightMusic.currentTime = 0;
+                        thisnightMusic.play();
+                        thisnightMusic.play().catch(error => console.log('Thisnight music failed to play:', error));
+                        document.querySelector('.new-screen2').style.display = 'flex';
                     });
                 }, 2000); // Delay to allow blackout effect to take place
             }
