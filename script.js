@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (highlightAudio) {
             setTimeout(() => {
                 highlightAudio.play().catch(error => console.log('Highlight audio failed to play:', error));
-            }, 200); // 200 milliseconds delay
+            }, 200); // 500 milliseconds delay
         }
     }
 
@@ -31,7 +31,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const introScreen = document.querySelector('.intro-screen');
         const hiddenContent = document.querySelector('.hidden-content');
 
+        // Play highlight audio with delay when the center button is clicked
         playHighlightAudio();
+
         introScreen.classList.add('zoomed');
 
         setTimeout(() => {
@@ -47,63 +49,23 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('.shape-2').classList.add('fall-apart-3');
         document.querySelector('.shape-3').classList.add('fall-apart-3');
         
+        // Mute the background video during blackout
         if (backgroundVideo) {
             backgroundVideo.volume = 0;
         }
 
+        // Stop highlight audio
         stopHighlightAudio();
 
         setTimeout(() => {
             document.body.classList.add('blackout');
-            showSadFace(); // Show the sad face after blackout
         }, 2000); 
     });
 
-    function showSadFace() {
-        const sadFace = document.querySelector('.sad-face');
-        sadFace.classList.add('show');
-        
-        setTimeout(() => {
-            sadFace.classList.add('fade-out');
-
-            setTimeout(() => {
-                sadFace.style.display = 'none';
-                showWaitMessage();
-            }, 1000); // Fade out duration
-        }, 1500); // Display sad face for 1.5 seconds
-    }
-
-    function showWaitMessage() {
-        const waitMessage = document.querySelector('.wait-message');
-        waitMessage.classList.add('show');
-
-        setTimeout(() => {
-            document.body.classList.add('blackout-again');
-            waitMessage.classList.add('fade-out');
-
-            setTimeout(() => {
-                waitMessage.style.display = 'none';
-                playHackSequence();
-            }, 1000); // Fade out duration
-        }, 2000); // Display wait message for 2 seconds
-    }
-
-    function playHackSequence() {
-        const hackMessage = document.querySelector('.hack-message');
-        const hackVideo = document.querySelector('.hack-video');
-
-        hackVideo.play().catch(error => console.log('Hack video failed to play:', error));
-        hackMessage.classList.add('show');
-
-        setTimeout(() => {
-            transitionToNewScreen();
-        }, 3000); // Display hack message for 3 seconds
-    }
-
-    function transitionToNewScreen() {
+    document.querySelector('.shape-1s').addEventListener('click', function() {
         const hiddenContent = document.querySelector('.hidden-content');
         const newScreen = document.querySelector('.new-screen');
-        
+
         hiddenContent.classList.add('break-apart');
 
         setTimeout(() => {
@@ -111,16 +73,19 @@ document.addEventListener('DOMContentLoaded', function() {
             newScreen.style.display = 'flex'; 
             backgroundMusic.play().catch(error => console.log('Background music failed to play:', error));
             
+            // Ensure the previous background video is muted
+            if (backgroundVideo) {
+                backgroundVideo.volume = 0;
+            }
+            
+            // Ensure the new background video is not muted
             if (newBackgroundVideo) {
                 newBackgroundVideo.play().catch(error => console.log('New background video failed to play:', error));
                 newBackgroundVideo.volume = 1;
             }
 
+            // Stop highlight audio
             stopHighlightAudio();
         }, 1000); 
-    }
-
-    document.querySelector('.shape-1s').addEventListener('click', function() {
-        transitionToNewScreen();
     });
 });
