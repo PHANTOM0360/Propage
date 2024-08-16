@@ -168,11 +168,11 @@ body {
 
 .shape-3s {
     position: absolute;
-    width: 85%;
+    width: 75;
     height: 85%;
     top: 6%;
     left: 5%;
-    background-color: #08162e;
+    background-color: #ffffff;
     border-radius: 50%;
     overflow: hidden;
     animation: rotate 10s linear infinite;
