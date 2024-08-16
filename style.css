@@ -332,79 +332,42 @@ body.blackout {
         transform: translate(0, 1000px);
     }
 }
-
-/* Sad face */
-.sad-face {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    z-index: 10001;
+@keyframes slide-in-from-left {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
-.sad-face.show {
-    opacity: 1;
+@keyframes slide-in-from-right {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
-.sad-face.fade-out {
-    opacity: 0;
+.shape-1s, .shape-2s {
+    animation: slide-in-from-left 1s forwards;
 }
 
-/* Wait message */
-.wait-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    font-size: 40px;
-    font-family: 'Modak';
-    color: #f6ab00;
-    transition: opacity 1s ease-in-out;
-    z-index: 10002;
+.shape-3s, .text p, .text span {
+    animation: slide-in-from-right 1s forwards;
 }
 
-.wait-message.show {
-    opacity: 1;
+.text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.wait-message.fade-out {
-    opacity: 0;
-}
-
-/* Hack message */
-.hack-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    font-size: 40px;
-    font-family: 'Modak';
-    color: #f6ab00;
-    transition: opacity 1s ease-in-out;
-    z-index: 10003;
-}
-
-.hack-message.show {
-    opacity: 1;
-}
-
-/* Hack video */
-.hack-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 10000;
-}
-
-/* Additional blackout for the second transition */
-body.blackout-again {
-    background-color: black;
-    transition: background-color 1.5s ease-in-out;
+.text p, .text span {
+    margin: 10px; 
 }
