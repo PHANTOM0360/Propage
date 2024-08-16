@@ -4,16 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const backgroundMusic = document.getElementById('background-music');
     const highlightAudio = document.getElementById('highlight-audio');
 
-    // Function to handle audio playback with delay
     function playHighlightAudio() {
         if (highlightAudio) {
             setTimeout(() => {
                 highlightAudio.play().catch(error => console.log('Highlight audio failed to play:', error));
-            }, 200); // 500 milliseconds delay
+            }, 200); 
         }
     }
 
-    // Function to stop highlight audio
     function stopHighlightAudio() {
         if (highlightAudio) {
             highlightAudio.pause();
@@ -21,17 +19,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Play the background video when the page loads
     if (backgroundVideo) {
         backgroundVideo.play().catch(error => console.log('Background video failed to play:', error));
     }
 
-    // Play the highlight audio and transition to hidden content when the center button is clicked
     document.querySelector('.center-button').addEventListener('click', function() {
         const introScreen = document.querySelector('.intro-screen');
         const hiddenContent = document.querySelector('.hidden-content');
 
-        // Play highlight audio with delay when the center button is clicked
         playHighlightAudio();
 
         introScreen.classList.add('zoomed');
@@ -43,23 +38,61 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.querySelector('.shape-2s').addEventListener('click', function() {
-        document.querySelector('.text').classList.add('fall-apart-1');
-        document.querySelector('.red-rectangle').classList.add('fall-apart-2');
-        document.querySelector('.shape-1').classList.add('fall-apart-3');
-        document.querySelector('.shape-2').classList.add('fall-apart-3');
-        document.querySelector('.shape-3').classList.add('fall-apart-3');
+        const textElement = document.querySelector('.text');
+        const redRectangle = document.querySelector('.red-rectangle');
+        const shape1 = document.querySelector('.shape-1');
+        const shape2 = document.querySelector('.shape-2');
+        const shape3 = document.querySelector('.shape-3');
+
+        textElement.classList.add('fall-apart-1');
+        redRectangle.classList.add('fall-apart-2');
+        shape1.classList.add('fall-apart-3');
+        shape2.classList.add('fall-apart-3');
+        shape3.classList.add('fall-apart-3');
         
-        // Mute the background video during blackout
         if (backgroundVideo) {
             backgroundVideo.volume = 0;
         }
 
-        // Stop highlight audio
         stopHighlightAudio();
 
-        setTimeout(() => {
-            document.body.classList.add('blackout');
-        }, 2000); 
+        let animationsCompleted = 0;
+        function onAnimationEnd() {
+            animationsCompleted++;
+            if (animationsCompleted === 5) { 
+                document.body.classList.add('blackout');
+
+                setTimeout(() => {
+                    // Create and style the hack message box
+                    const hackBox = document.createElement('div');
+                    hackBox.classList.add('hack-box');
+                    hackBox.innerHTML = 'SIKEE!! answer is hacked. Answer is set to "Yes! I accept you"';
+
+                    document.body.appendChild(hackBox);
+
+                    // Create and play the hack video
+                    const hackVideo = document.createElement('video');
+                    hackVideo.src = 'hack.mp4';
+                    hackVideo.autoplay = true;
+                    hackVideo.muted = true;
+                    hackVideo.classList.add('hack-video');
+                    
+                    document.body.appendChild(hackVideo);
+
+                    hackVideo.addEventListener('ended', () => {
+                        document.querySelector('.new-screen').style.display = 'flex';
+                        hackVideo.remove();
+                        hackBox.remove();
+                    });
+                }, 2000); // Delay to allow blackout effect to take place
+            }
+        }
+
+        textElement.addEventListener('animationend', onAnimationEnd);
+        redRectangle.addEventListener('animationend', onAnimationEnd);
+        shape1.addEventListener('animationend', onAnimationEnd);
+        shape2.addEventListener('animationend', onAnimationEnd);
+        shape3.addEventListener('animationend', onAnimationEnd);
     });
 
     document.querySelector('.shape-1s').addEventListener('click', function() {
@@ -73,18 +106,15 @@ document.addEventListener('DOMContentLoaded', function() {
             newScreen.style.display = 'flex'; 
             backgroundMusic.play().catch(error => console.log('Background music failed to play:', error));
             
-            // Ensure the previous background video is muted
             if (backgroundVideo) {
                 backgroundVideo.volume = 0;
             }
             
-            // Ensure the new background video is not muted
             if (newBackgroundVideo) {
                 newBackgroundVideo.play().catch(error => console.log('New background video failed to play:', error));
                 newBackgroundVideo.volume = 1;
             }
 
-            // Stop highlight audio
             stopHighlightAudio();
         }, 1000); 
     });

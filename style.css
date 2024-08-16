@@ -371,3 +371,78 @@ body.blackout {
 .text p, .text span {
     margin: 10px; 
 }
+/* Hack message box styling */
+.hack-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.692); /* Slightly transparent black background */
+    border: 3px solid limegreen; /* Bright green border */
+    color: white;
+    font-family: 'Courier New', Courier, monospace; /* Monospace font for a "hacker" feel */
+    font-size: 2.2rem;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 0 20px limegreen; /* Glowing green shadow */
+    border-radius: 10px; /* Rounded corners */
+    width: 80%; /* Width set to 80% of the viewport width */
+    max-width: 600px; /* Maximum width of the box */
+    animation: hackBoxAppear 1s ease-in-out; /* Animation for appearing */
+}
+
+/* Animation for the hack message box appearance */
+@keyframes hackBoxAppear {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Hack video overlay styling */
+.hack-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    width: 100%; /* Video will take up 90% of the viewport width */
+    border-radius: 8px; /* Rounded corners for the video */
+    opacity: 0;
+    animation: videoAppear .5s ease-in-out forwards; /* Animation for video appearance */
+}
+
+/* Animation for the video appearance */
+@keyframes videoAppear {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Blackout effect on the body */
+.blackout {
+    background-color: black;
+    animation: blackoutEffect 2s ease-in-out forwards;
+}
+
+/* Animation for blackout effect */
+@keyframes blackoutEffect {
+    0% {
+        background-color: white;
+        opacity: 1;
+    }
+    100% {
+        background-color: black;
+        opacity: 1;
+    }
+}
