@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=MedievalSharp&family=Modak&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oxanium:wght@200..800&family=Style+Script&display=swap');
 body {
     margin: 0;
-    height: 95vh;
-    background-color: rgb(0, 0, 0);
+    height: 100vh;
+    background-color: #08162e;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -91,16 +91,6 @@ body {
     overflow: hidden;
 }
 
-.background-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-}
-
 .red-rectangle::before {
     content: '';
     position: absolute;
@@ -115,7 +105,7 @@ body {
 
 .yellow-shape {
     position: absolute;
-    background-color: black;
+    background-color: #08162e;
     border-radius: 65px;
     display: flex;
     justify-content: center;
@@ -151,7 +141,7 @@ body {
     width: 70%;
     height: 90%;
     background-color: #ffffff;
-    box-shadow: inset 2px 2px 0px rgb(255, 196, 0);
+    box-shadow: inset 2px 6px 0px rgb(255, 196, 0);
     top: 5%;
     left: 28%;
     border-radius: 60px;
@@ -166,7 +156,7 @@ body {
     width: 80%;
     height: 55%;
     background-color: #ffffff;
-    box-shadow: inset -2px -2px 0px rgb(255, 196, 0);
+    box-shadow: inset -2px -6px 0px rgb(255, 196, 0);
     top: 4%;
     left: 17%;
     border-radius: 60px;
@@ -182,7 +172,7 @@ body {
     height: 85%;
     top: 6%;
     left: 5%;
-    background-color: #ffffff;
+    background-color: #08162e;
     border-radius: 50%;
     overflow: hidden;
     animation: rotate 10s linear infinite;
@@ -198,7 +188,7 @@ body {
 .theshape span {
     font-size: 40px;
     font-family: 'Modak';
-    color: #f6ab00;
+    color: #b96178;
     text-align: center;
 }
 
@@ -244,13 +234,13 @@ body {
 .text span {
     background-color: rgb(255, 255, 255);
     border-radius: 40px;
-    border: 10px solid black;
+    border: 10px solid #08162e;
     padding: 10px;
     font-size: 24px;
     font-family: 'Modak', sans-serif;
     color: #f6ab00;
     position: absolute;
-    box-shadow: inset 2px 2px 0px rgb(255, 196, 0);
+    box-shadow: inset 2px 5px 0px #b96178;
     top: -33%;
     left: 50%;
     transform: translateX(0);
@@ -259,14 +249,14 @@ body {
 
 .text p {
     background-color: rgb(255, 255, 255);
-    border: 10px solid rgb(0, 0, 0);
+    border: 10px solid #08162e;
     border-radius: 33px;
     margin-top: 0px;
-    box-shadow: inset -2px -2px 0px rgb(255, 196, 0);
+    box-shadow: inset -2px -3px 0px rgb(0, 225, 255);
     font-size: 18px;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    color: #2e2309;
+    color: #b96178;
     max-width: 600px;
     transition: transform 0.3s ease;
 }
@@ -341,4 +331,80 @@ body.blackout {
     100% {
         transform: translate(0, 1000px);
     }
+}
+
+/* Sad face */
+.sad-face {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 10001;
+}
+
+.sad-face.show {
+    opacity: 1;
+}
+
+.sad-face.fade-out {
+    opacity: 0;
+}
+
+/* Wait message */
+.wait-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    font-size: 40px;
+    font-family: 'Modak';
+    color: #f6ab00;
+    transition: opacity 1s ease-in-out;
+    z-index: 10002;
+}
+
+.wait-message.show {
+    opacity: 1;
+}
+
+.wait-message.fade-out {
+    opacity: 0;
+}
+
+/* Hack message */
+.hack-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    font-size: 40px;
+    font-family: 'Modak';
+    color: #f6ab00;
+    transition: opacity 1s ease-in-out;
+    z-index: 10003;
+}
+
+.hack-message.show {
+    opacity: 1;
+}
+
+/* Hack video */
+.hack-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 10000;
+}
+
+/* Additional blackout for the second transition */
+body.blackout-again {
+    background-color: black;
+    transition: background-color 1.5s ease-in-out;
 }
