@@ -358,7 +358,7 @@ body.blackout {
     animation: slide-in-from-left 1s forwards;
 }
 
-.shape-3s, .text p, .text span {
+.text p, .text span {
     animation: slide-in-from-right 1s forwards;
 }
 
