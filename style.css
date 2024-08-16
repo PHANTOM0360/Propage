@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=MedievalSharp&family=Modak&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oxanium:wght@200..800&family=Style+Script&display=swap');
 body {
     margin: 0;
-    height: 100vh;
+    height: 95vh;
     background-color: #08162e;
     overflow: hidden;
     display: flex;
