@@ -67,6 +67,8 @@ body {
     font-size: 36px;
     font-family: 'Oxanium';
     font-weight: bold;
+    display: flex;
+    overflow: hidden;
 }
 .loading-bar {
     width: 0;
