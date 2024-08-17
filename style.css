@@ -291,7 +291,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     color: #b96178;
-    max-width: 700px;
+     max-width: 600px;  /*change size accordingly  */
     transition: transform 0.3s ease;
 }
 
