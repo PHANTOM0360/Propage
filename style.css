@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=MedievalSharp&family=Modak&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oxanium:wght@200..800&family=Style+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=MedievalSharp&family=Modak&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oxanium:wght@200..800&family=Style+Script&display=swap');
 body {
     margin: 0;
     height: 95vh;
@@ -56,18 +57,26 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80%; /* Adjust width as needed */
-    height: 10px; /* Adjust height as needed */
-    background-color: #ffffff;
+    height: 40px; /* Adjust height as needed */
+    background-color: #000000;
     border-radius: 5px;
     overflow: hidden;
 }
-
+.loading-bar span{
+    color: rgb(0, 0, 0); /* Adjust text color if needed */
+    font-size: 36px;
+    font-family: 'Oxanium';
+    font-weight: bold;
+}
 .loading-bar {
     width: 0;
     height: 100%;
-    background-color: #f6ab00;
+    background-color: rgb(0, 225, 255);
     transition: width 1s ease;
     border-radius: 5px;
+    display: flex; /* Add flexbox layout */
+    align-items: center; /* Center vertically */
+    justify-content: center;
 }
 
 .hidden-content {
@@ -156,6 +165,7 @@ body {
     top: 10%;
     right: -8%;
     border-radius: 50%;
+    box-shadow: inset 5px 0px 0px rgb(0, 225, 255);
 }
 
 .shape-1s {
@@ -163,7 +173,7 @@ body {
     width: 70%;
     height: 90%;
     background-color: #ffffff;
-    box-shadow: inset 2px 6px 0px rgb(255, 196, 0);
+    box-shadow: inset -7px 4px 0px rgb(255, 196, 0);
     top: 5%;
     left: 28%;
     border-radius: 60px;
@@ -178,7 +188,7 @@ body {
     width: 80%;
     height: 55%;
     background-color: #ffffff;
-    box-shadow: inset -2px -6px 0px rgb(255, 196, 0);
+    box-shadow: inset -7px -4px 0px rgb(255, 196, 0);;
     top: 4%;
     left: 17%;
     border-radius: 60px;
