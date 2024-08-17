@@ -4,6 +4,52 @@ document.addEventListener('DOMContentLoaded', function() {
     const backgroundMusic = document.getElementById('background-music');
     const highlightAudio = document.getElementById('highlight-audio');
     const thisnightMusic = document.getElementById('thisnight-music');
+    const loadingBar = document.querySelector('.loading-bar');
+    const centerButton = document.querySelector('.center-button');
+
+    // Initialize button state
+    if (centerButton) {
+        centerButton.disabled = true;
+        console.log('Center button is disabled initially.');
+    } else {
+        console.error('Center button not found.');
+    }
+
+    // Update loading bar and button state
+    function updateLoadingBar() {
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 1;
+            loadingBar.style.width = `${progress}%`;
+
+            if (progress >= 100) {
+                clearInterval(interval);
+
+                if (centerButton) {
+                    centerButton.disabled = false; // Enable the button when loading is complete
+                    centerButton.classList.add('enabled'); // Add a class for styling if needed
+                    console.log('Center button is enabled.');
+
+                    // After loading is complete, hide the loading bar
+                    setTimeout(() => {
+                        document.querySelector('.loading-container').style.display = 'none';
+
+                        // Ensure the background video is played
+                        if (backgroundVideo) {
+                            backgroundVideo.play().catch(error => console.log('Background video failed to play:', error));
+                        }
+
+                        // Ensure the background music is played
+                        if (backgroundMusic) {
+                            backgroundMusic.play().catch(error => console.log('Background music failed to play:', error));
+                        }
+                    }, 500); // Adjust delay as needed
+                }
+            }
+        }, 50); // Adjust interval as needed
+    }
+
+    updateLoadingBar();
 
     function playHighlightAudio() {
         if (highlightAudio) {
@@ -20,23 +66,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    if (backgroundVideo) {
-        backgroundVideo.play().catch(error => console.log('Background video failed to play:', error));
+    // Ensure the center button functionality only after loading is complete
+    if (centerButton) {
+        centerButton.addEventListener('click', function() {
+            const introScreen = document.querySelector('.intro-screen');
+            const hiddenContent = document.querySelector('.hidden-content');
+
+            if (introScreen && hiddenContent) {
+                playHighlightAudio();
+
+                introScreen.classList.add('zoomed');
+
+                setTimeout(() => {
+                    introScreen.style.display = 'none';
+                    hiddenContent.classList.add('show');
+                }, 1000); 
+            } else {
+                console.error('Intro screen or hidden content not found.');
+            }
+        });
     }
-
-    document.querySelector('.center-button').addEventListener('click', function() {
-        const introScreen = document.querySelector('.intro-screen');
-        const hiddenContent = document.querySelector('.hidden-content');
-
-        playHighlightAudio();
-
-        introScreen.classList.add('zoomed');
-
-        setTimeout(() => {
-            introScreen.style.display = 'none';
-            hiddenContent.classList.add('show');
-        }, 1000); 
-    });
 
     document.querySelector('.shape-2s').addEventListener('click', function() {
         const textElement = document.querySelector('.text');
@@ -50,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
         shape1.classList.add('fall-apart-3');
         shape2.classList.add('fall-apart-3');
         shape3.classList.add('fall-apart-3');
-        
+
         if (backgroundVideo) {
             backgroundVideo.volume = 0;
         }
@@ -93,7 +142,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         declineVideo.classList.add('decline-video');
                         document.body.appendChild(declineVideo);
                         thisnightMusic.currentTime = 0;
-                        thisnightMusic.play();
                         thisnightMusic.play().catch(error => console.log('Thisnight music failed to play:', error));
                         document.querySelector('.new-screen2').style.display = 'flex';
                     });
