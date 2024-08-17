@@ -58,7 +58,7 @@ body {
     transform: translate(-50%, -50%);
     width: 80%; /* Adjust width as needed */
     height: 40px; /* Adjust height as needed */
-    background-color: #000000;
+    background-color: #ffffff;
     border-radius: 5px;
     overflow: hidden;
 }
