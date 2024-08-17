@@ -37,11 +37,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Ensure the background video is played
                         if (backgroundVideo) {
                             backgroundVideo.play().catch(error => console.log('Background video failed to play:', error));
+                            backgroundMusic=0;
                         }
 
                         // Ensure the background music is played
                         if (backgroundMusic) {
                             backgroundMusic.play().catch(error => console.log('Background music failed to play:', error));
+                            backgroundMusic=0;
                         }
                     }, 500); // Adjust delay as needed
                 }
